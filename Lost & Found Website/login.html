@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .logo img {
+            width: 150px; /* Adjust this value as needed */
+            height: auto; /* Keeps the aspect ratio */
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #eb3834;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: black;
+            color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #eb3834;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="images/logo1.png" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Report Lost</a>
+            <a href="#">Report Found</a>
+        </div>
+        <div class="icons">
+            <span class="user-icon"><a href="register.html"><i style="font-size: 24px" class="fa">&#xf007;</i></a></span>
+        </div>
+    </nav>
+
+    <div class="login-form">
+        <h2>Login</h2>
+        <form id="login-form" action="http://localhost/pikachu/Nayan/login.php" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Error message placeholder -->
+        <div class="error" id="login-error"></div>
+
+        <div class="signup-link">
+            <p>If not already registered?
+                 <a href="register.html"><b>Sign Up</b></a></p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Lost & Found Co. All rights reserved.
+    </footer>
+
+    <!-- JavaScript to handle error display -->
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            if (error) {
+                let errorMessage = '';
+                switch (error) {
+                    case 'invalid_password':
+                        errorMessage = 'Invalid password.';
+                        break;
+                    case 'invalid_email':
+                        errorMessage = 'Invalid email.';
+                        break;
+                    case 'missing_fields':
+                        errorMessage = 'Email and Password are required.';
+                        break;
+                }
+                if (errorMessage) {
+                    // Show the error message using an alert
+                    alert(errorMessage);
+                }
+            }
+        };
+    </script>
+    
+</body>
+</html>
