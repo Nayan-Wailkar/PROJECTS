@@ -1,0 +1,129 @@
+/* Common style for nav bar of all pages */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #f4f4f4;
+}
+
+nav {
+  background-color: #12b38a;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.nav-links, .icons {
+  display: flex;
+  gap: 20px;
+}
+
+nav a, .icons span {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover, .icons span:hover {
+  color: black;
+}
+
+.user-icon {
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+/* User Dropdown Styles */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 220px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  z-index: 1;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown-content p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #12b38a; /* Name and Email color */
+}
+
+.dropdown-content .logout-btn {
+  display: block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #12b38a;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content .logout-btn:hover {
+  background-color: black;
+}
+
+.dropdown-content p span {
+  color: black; /* Text following the name and email will be black */
+}
+
+.user-dropdown.show .dropdown-content {
+  display: block;
+}
+
+/* User Icon Hover */
+.user-icon {
+  cursor: pointer;
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.2); /* Icon scale effect on hover */
+}
+
+/* Footer styles */
+footer {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  transition: color 0.3s ease;
+}
+
+footer:hover {
+  color: #12b38a;
+}
+
+.container {
+  padding-bottom: 100px; /* Leave space for footer */
+}
+
+/* The Common CSS ends here */

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration </title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #12b38a;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: black;
+            color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .email-warning {
+            display: none;
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #12b38a;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        select {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: Arial, sans-serif;
+        }
+
+        input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+        
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="images/logo2.png" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Create Crossword</a>
+            <a href="#">Leaderboard</a>
+            <a href="#">Crossword Gallery</a>
+        </div>
+        <div class="icons">
+            <span class="user-icon"><a href="login.html"><i style="font-size: 24px" class="fa">&#xf007;</i></a></span>
+        </div>
+    </nav>
+ <!-- MAIN CONTAINER -->
+ <div class="container">
+    <div class="login-form">
+        <h2>Registration</h2>
+        <form id="registration-form" action="http://localhost/mewtwo/noname/register.php" method="post" onsubmit="register(event)">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="contact" name="contact" pattern="\d{10}" required title="Please enter a valid 10-digit phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="role">I am a:</label>
+                <select id="role" name="role" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="creator">Creator</option>
+                    <option value="solver">Solver</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required onfocus="showPasswordHint()" onblur="hidePasswordHint()" oninput="validatePassword()">
+                <small id="password-hint" style="display: none;font-size: 0.9em;">
+                    <ul style="margin: 5px 0 0; padding-left: 20px;">
+                        <li id="length" style="color: red;">Be at least 8 characters long</li>
+                        <li id="special-char" style="color: red;">Contain at least one special character</li>
+                        <li id="number" style="color: red;">Contain at least one number</li>
+                    </ul>
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            
+            <button type="submit">Register</button>
+            
+
+        </form>
+        <div class="signup-link">
+            <p>Already registered? <a href="login.html"><b>Login</b></a></p>
+        </div>
+    </div>
+</div>
+    <footer>
+        &copy; 2025 CrossWord Inc. All rights reserved.
+    </footer>
+
+    <script>
+        // Function to handle form submission
+        function register(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+    
+            // Retrieve form values
+            var name = document.getElementById('name').value;
+            var contact = document.getElementById('contact').value;
+            var role = document.getElementById('role').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            // Validate password complexity
+            function validatePassword() {
+                const password = document.getElementById('password').value;
+                const lengthRequirement = password.length >= 8;
+                const specialCharRequirement = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                const numberRequirement = /\d/.test(password);
+
+                // Update visual indicators for each requirement
+                document.getElementById('length').style.color = lengthRequirement ? 'green' : 'red';
+                document.getElementById('special-char').style.color = specialCharRequirement ? 'green' : 'red';
+                document.getElementById('number').style.color = numberRequirement ? 'green' : 'red';
+            }
+    
+            // Validate phone number
+            if (contact.length !== 10) {
+                alert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+            if (!role) {
+                alert("Please select your role (Creator or Solver).");
+                return;
+            }
+
+            // Validate password requirements
+            const lengthRequirement = password.length >= 8;
+            const specialCharRequirement = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const numberRequirement = /\d/.test(password);
+
+            if (!lengthRequirement || !specialCharRequirement || !numberRequirement) {
+                alert("Password must meet all requirements:\n- Be at least 8 characters long\n- Contain at least one special character\n- Contain at least one number");
+                return;
+            }    
+
+
+            // Validate password match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+    
+            // Form validation successful, submit the form
+            document.getElementById('registration-form').submit();
+        }
+    
+        // Show the password hint
+        function showPasswordHint() {
+            document.getElementById('password-hint').style.display = 'block';
+        }
+
+        // Hide the password hint
+        function hidePasswordHint() {
+            document.getElementById('password-hint').style.display = 'none';
+        }
+
+        // Function to display alerts based on error parameters
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            if (error) {
+                let errorMessage = '';
+                switch (error) {
+                    case 'email_or_contact_exists':
+                        errorMessage = 'Email or contact already exists.';
+                        break;
+                    case 'missing_fields':
+                        errorMessage = 'All fields are required.';
+                        break;
+                }
+                if (errorMessage) {
+                    // Show the error message using an alert
+                    alert(errorMessage);
+                }
+            }
+        };
+    </script>    
+    
+</body>
+</html>
