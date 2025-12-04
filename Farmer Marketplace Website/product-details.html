@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Details - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="product-details">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a> 
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="product-details">
+      <img id="detailImage" class="detail-img" alt="Product image" />
+      <div class="detail-body">
+        <h2 id="detailTitle"></h2>
+        <p id="detailMeta" class="muted"></p>
+        <p id="uploaderInfo" class="muted"></p>
+        <p id="detailDesc"></p>
+        <div class="detail-actions">
+          <button id="detailAddToCart" class="btn btn-secondary">Add to Cart</button>
+          <a id="contactMail" class="btn btn-primary" target="_blank">Contact via Email</a>
+          <a id="contactWhatsApp" class="btn btn-farmer" target="_blank">WhatsApp</a>
+          <!-- ADD DELETE BUTTON FOR PRODUCT OWNER -->
+          <button id="deleteProductBtn" class="btn btn-danger hidden">Delete Product</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

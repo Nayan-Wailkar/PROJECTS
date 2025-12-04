@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auctions - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="auction">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="#">Auctions</a>
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+      
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h2>Auctions</h2>
+      <button id="createAuctionBtn" class="btn btn-primary hidden">Create Auction</button>
+    </div>
+
+    <section class="card filters">
+      <div class="form-grid-4">
+        <input id="auctionSearch" type="search" placeholder="Search by product name..." />
+        <select id="auctionStatus">
+          <option value="all">All Auctions</option>
+          <option value="live">Live Auctions</option>
+          <option value="upcoming">Upcoming Auctions</option>
+          <option value="ended">Ended Auctions</option>
+        </select>
+        <input id="auctionLocation" type="text" placeholder="Filter by location" />
+        <button id="applyAuctionFilters" class="btn btn-primary">Apply Filters</button>
+      </div>
+    </section>
+
+    <section class="cards" id="auctionList"></section>
+  </main>
+
+  <template id="auctionCardTpl">
+    <div class="card auction-card">
+      <img class="auction-img" alt="Auction image" />
+      <div class="auction-badge"></div>
+      <div class="auction-body">
+        <h4 class="auction-title"></h4>
+        <p class="muted auction-meta"></p>
+        <div class="auction-stats">
+          <span class="base-price"></span>
+          <span class="bid-count"></span>
+        </div>
+        <div class="auction-timer"></div>
+        <div class="card-actions">
+          <button class="btn btn-primary view-details">View Details</button>
+          <button class="btn btn-secondary farmer-actions hidden">Manage Bids</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

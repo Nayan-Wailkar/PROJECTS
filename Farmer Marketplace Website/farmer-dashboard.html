@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farmer Dashboard - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="farmer-dashboard">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a>
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h2>My Products</h2>
+      <a href="./create-auction.html" class="btn btn-primary">Create Auction</a>
+    </div>
+
+    <section class="card">
+      <h3>Add / Edit Product</h3>
+      <form id="productForm" class="form">
+        <input type="hidden" id="productId" />
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="productName">Name</label>
+            <input id="productName" type="text" required />
+          </div>
+          <div class="form-row">
+            <label>Prices</label>
+            <div class="form-grid-3">
+              <input id="priceKg" type="number" min="0" step="0.01" placeholder="₹ per kg" />
+              <input id="priceDozen" type="number" min="0" step="0.01" placeholder="₹ per dozen" />
+              <input id="priceUnit" type="number" min="0" step="0.01" placeholder="₹ per unit" />
+            </div>
+            <span class="form-hint">Provide at least one price.</span>
+          </div>
+          <div class="form-row">
+            <label for="productQuantity">Quantity</label>
+            <input id="productQuantity" type="number" min="0" step="1" required />
+          </div>
+          <div class="form-row">
+            <label for="productCategory">Category</label>
+            <input id="productCategory" type="text" placeholder="e.g., Vegetables, Fruits" />
+          </div>
+          <div class="form-row">
+            <label for="productLocation">Location</label>
+            <input id="productLocation" type="text" placeholder="City, State" />
+          </div>
+          <div class="form-row">
+            <label for="productImage">Image (less than 1 mb)</label>
+            <input id="productImage" type="file" accept="image/*" />
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" rows="3" placeholder="Short description..."></textarea>
+        </div>
+        <div class="form-row">
+          <button class="btn btn-primary" type="submit">Save Product</button>
+          <button class="btn btn-outline" id="resetFormBtn" type="button">Reset</button>
+        </div>
+        <p id="productFormMsg" class="muted"></p>
+      </form>
+    </section>
+
+    <section class="cards" id="myProducts"></section>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

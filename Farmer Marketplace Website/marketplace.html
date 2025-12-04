@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marketplace - Farmer Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="marketplace">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="#">Products</a>
+      <a href="./auction.html">Auctions</a>
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Fresh from Farmers</h2>
+
+    <section class="card filters">
+      <div class="form-grid-3">
+        <input id="searchInput" type="search" placeholder="Search products..." />
+        <input id="filterCategory" type="text" placeholder="Category" />
+        <input id="filterLocation" type="text" placeholder="Location" />
+        <input id="minPrice" type="number" min="0" step="0.01" placeholder="Min Price" />
+        <input id="maxPrice" type="number" min="0" step="0.01" placeholder="Max Price" />
+        <button id="applyFilters" class="btn btn-primary">Apply</button>
+      </div>
+    </section>
+
+    <section class="cards" id="marketProducts"></section>
+  </main>
+
+  <template id="productCardTpl">
+    <div class="card product-card">
+      <img class="product-img" alt="Product image" />
+      <div class="product-body">
+        <h4 class="product-title"></h4>
+        <p class="muted product-meta"></p>
+        <p class="product-desc"></p>
+        <div class="card-actions">
+          <button class="btn btn-secondary add-to-cart">Add to Cart</button>
+          <a class="btn btn-primary" target="_self">View Details</a>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

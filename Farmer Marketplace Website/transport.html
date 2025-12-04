@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transport Services - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .transport-card {
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .transport-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .transport-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .transport-type {
+      background: var(--primary-50);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .transport-features {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    
+    .feature-tag {
+      background: var(--bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .rating {
+      color: #ffc107;
+      margin-right: 8px;
+    }
+    
+    .quote-form {
+      background: var(--primary-50);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    
+    .tracking-card {
+      background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
+      border: none;
+    }
+
+    .partner-badge {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .official-partner {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    }
+
+    .partner-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-right: 12px;
+    }
+
+    .partner-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body data-page="transport">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a>
+      <a href="#">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a>
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Transport & Logistics Services</h2>
+    <p class="muted">Connect with reliable transport providers for your agricultural goods</p>
+
+    <!-- Quick Quote Section -->
+    <section class="card quote-form">
+      <h3>Get Instant Shipping Quote</h3>
+      <form id="quoteForm" class="form">
+        <div class="form-grid-3">
+          <div class="form-row">
+            <label for="pickupLocation">Pickup Location</label>
+            <input type="text" id="pickupLocation" placeholder="City, State" required>
+          </div>
+          <div class="form-row">
+            <label for="deliveryLocation">Delivery Location</label>
+            <input type="text" id="deliveryLocation" placeholder="City, State" required>
+          </div>
+          <div class="form-row">
+            <label for="cargoWeight">Cargo Weight (kg)</label>
+            <input type="number" id="cargoWeight" placeholder="e.g., 100" required>
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="cargoType">Cargo Type</label>
+            <select id="cargoType" required>
+              <option value="">Select cargo type</option>
+              <option value="vegetables">Vegetables</option>
+              <option value="fruits">Fruits</option>
+              <option value="grains">Grains</option>
+              <option value="dairy">Dairy Products</option>
+              <option value="livestock">Livestock</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="urgency">Urgency</label>
+            <select id="urgency" required>
+              <option value="standard">Standard (3-5 days)</option>
+              <option value="express">Express (1-2 days)</option>
+              <option value="same_day">Same Day</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Quote</button>
+      </form>
+      <div id="quoteResult" class="hidden" style="margin-top: 16px; padding: 12px; background: white; border-radius: 8px;"></div>
+    </section>
+
+    <!-- Official Logistics Partners -->
+    <section style="margin-top: 24px;">
+  <h3>Third-Party Logistics Services</h3>
+  <p class="muted">Trusted logistics companies for reliable agricultural transport</p>
+  <div class="cards" id="officialPartners">
+    <!-- TruckSuvidha -->
+    <div class="card transport-card" style="border-left: 4px solid #4CAF50;">
+      <div class="partner-header">
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center;">
+            <h4 style="margin: 0;">TruckSuvidha</h4>
+            <span class="partner-badge official-partner">PARTNER</span>
+          </div>
+          <span class="transport-type">Digital Logistics Platform</span>
+        </div>
+      </div>
+      
+      <div class="transport-features">
+        <span class="feature-tag">Real-time Tracking</span>
+        <span class="feature-tag">Instant Booking</span>
+        <span class="feature-tag">GPS Enabled</span>
+        <span class="feature-tag">24/7 Support</span>
+      </div>
+      
+      <p class="muted">India's leading digital logistics platform connecting shippers with truckers</p>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+        <div>
+          <span class="muted">• Pan-India</span>
+        </div>
+        <div style="text-align: right;">
+          <button class="btn btn-primary visit-website" data-website="https://www.trucksuvidha.com/" data-partner="TruckSuvidha">
+            Visit Website
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRANSIN -->
+    <div class="card transport-card" style="border-left: 4px solid #2196F3;">
+      <div class="partner-header">
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center;">
+            <h4 style="margin: 0;">TRANSIN</h4>
+            <span class="partner-badge official-partner">PARTNER</span>
+          </div>
+          <span class="transport-type">Logistics Aggregator</span>
+        </div>
+      </div>
+      
+      <div class="transport-features">
+        <span class="feature-tag">Cold Chain</span>
+        <span class="feature-tag">FTL/LTL</span>
+        <span class="feature-tag">Warehousing</span>
+        <span class="feature-tag">Insurance</span>
+      </div>
+      
+      <p class="muted">Comprehensive logistics solutions for agricultural and industrial sectors</p>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+        <div>
+          <span class="muted">• Major Cities</span>
+        </div>
+        <div style="text-align: right;">
+          <button class="btn btn-primary visit-website" data-website="https://www.transin.com" data-partner="TRANSIN">
+            Visit Website
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shivneri Logistics -->
+    <div class="card transport-card" style="border-left: 4px solid #FF9800;">
+      <div class="partner-header">
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center;">
+            <h4 style="margin: 0;">Shivneri Logistics</h4>
+            <span class="partner-badge official-partner"> PARTNER</span>
+          </div>
+          <span class="transport-type">Transport Service Provider</span>
+        </div>
+      </div>
+      
+      <div class="transport-features">
+        <span class="feature-tag">Refrigerated Trucks</span>
+        <span class="feature-tag">Timely Delivery</span>
+        <span class="feature-tag">Safe Handling</span>
+        <span class="feature-tag">Documentation</span>
+      </div>
+      
+      <p class="muted">Reliable transport services specializing in agricultural commodities</p>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+        <div>
+          <span class="muted">• Western & Southern India</span>
+        </div>
+        <div style="text-align: right;">
+          <button class="btn btn-primary visit-website" data-website="https://www.shivnerilogistics.com" data-partner="Shivneri Logistics">
+            Visit Website
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Available Transport Services -->
+    <section style="margin-top: 24px;">
+      <h3>Available Transport Partners</h3>
+      <div class="cards" id="transportServices">
+        <!-- Transport services will be loaded here -->
+      </div>
+    </section>
+
+    <!-- Available Transport Partners -->
+<section style="margin-top: 24px;">
+  <h3>Available Transport Partners</h3>
+  <p class="muted">Registered transport providers ready to serve your agricultural transport needs</p>
+  <div class="cards" id="transportServices">
+    <!-- Registered providers will be loaded here dynamically -->
+    <div class="card text-center">
+      <p class="muted">Loading transport providers...</p>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Transport Provider Registration -->
+    <section class="card" style="margin-top: 24px;">
+      <h3>Are you a Transport Provider?</h3>
+      <p>Join our network and reach more customers</p>
+      <div class="card-actions">
+        <button class="btn btn-primary" id="registerProvider">Register as Provider</button>
+        <a href="./provider-login.html" class="btn btn-outline">Provider Login</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Transport Provider Registration Modal -->
+  <div id="providerModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Register as Transport Provider</h3>
+        <button class="modal-close" id="closeProviderModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="providerForm" class="form">
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label for="companyName">Company Name *</label>
+              <input type="text" id="companyName" required>
+            </div>
+            <div class="form-row">
+              <label for="contactPerson">Contact Person *</label>
+              <input type="text" id="contactPerson" required>
+            </div>
+          </div>
+          
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label for="providerEmail">Email *</label>
+              <input type="email" id="providerEmail" required>
+            </div>
+            <div class="form-row">
+              <label for="providerPhone">Phone *</label>
+              <input type="tel" id="providerPhone" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <label for="services">Services Offered *</label>
+            <div class="form-grid-2">
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="refrigerated"> Refrigerated Transport
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="dry_goods"> Dry Goods
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="livestock"> Livestock
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="services" value="express"> Express Delivery
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <label for="coverage">Coverage Areas *</label>
+            <textarea id="coverage" placeholder="List states/cities you serve" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <script type="module" src="./main.js"></script>
+  
+  <!-- Add this inline JavaScript for the partner website redirects -->
+  <script>
+    // Partner website redirect functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Setup click event for all visit-website buttons
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('visit-website')) {
+          const website = e.target.dataset.website;
+          const partnerName = e.target.dataset.partner;
+          
+          const confirmed = confirm(`You are being redirected to ${partnerName}'s official website. Continue?`);
+          if (confirmed) {
+            window.open(website, '_blank', 'noopener,noreferrer');
+          }
+        }
+      });
+      
+      // Additional transport page specific functionality can go here
+      console.log('Transport page JavaScript loaded successfully');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farmer Marketplace - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="home">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a> 
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container hero">
+    <section class="hero-content">
+      <h1>Buy Fresh. Sell Smart.</h1>
+      <p>Connect farmers directly with buyers. Fresh produce, fair prices, transparent sourcing.</p>
+      <p class="tagline">From local fields to your table — support growers and get the freshest produce.</p>
+      <div class="cta-group">
+        <a class="btn btn-primary" href="./marketplace.html">Start Buying</a>
+        <a class="btn btn-farmer" href="./farmer-dashboard.html">I'm a Farmer</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> Farmer Marketplace</footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

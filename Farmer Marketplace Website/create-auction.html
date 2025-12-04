@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Auction - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="create-auction">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a>
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+      
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+    </nav>
+  </header>
+
+  <main class="container form-container">
+    <h2>Create New Auction</h2>
+    
+    <form id="auctionForm" class="form">
+      <div class="card">
+        <h3>Product Details</h3>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="productName">Product Name *</label>
+            <input id="productName" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="quantity">Quantity (kg) *</label>
+            <input id="quantity" type="number" min="1" step="0.1" required />
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" rows="3" placeholder="Describe your product..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="productImage">Product Image</label>
+          <input id="productImage" type="file" accept="image/*" />
+          <span class="form-hint">Max 1MB. Image will be stored as Base64.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Auction Details</h3>
+        <div class="form-grid-3">
+          <div class="form-row">
+            <label for="basePrice">Base Price (₹) *</label>
+            <input id="basePrice" type="number" min="1" step="0.01" required />
+          </div>
+          <div class="form-row">
+            <label for="bidIncrement">Bid Increment (₹) *</label>
+            <input id="bidIncrement" type="number" min="1" step="0.01" required />
+          </div>
+          <div class="form-row">
+            <label for="location">Location *</label>
+            <input id="location" type="text" required />
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="startDate">Start Date & Time *</label>
+            <input id="startDate" type="datetime-local" required />
+          </div>
+          <div class="form-row">
+            <label for="endDate">End Date & Time *</label>
+            <input id="endDate" type="datetime-local" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Farmer Details (Auto-filled from your profile)</h3>
+        <div class="form-grid-3">
+          <div class="form-row">
+            <label for="farmerName">Farmer Name</label>
+            <input id="farmerName" type="text" readonly />
+          </div>
+          <div class="form-row">
+            <label for="farmerEmail">Email</label>
+            <input id="farmerEmail" type="email" readonly />
+          </div>
+          <div class="form-row">
+            <label for="farmerMobile">Mobile Number</label>
+            <input id="farmerMobile" type="tel" readonly />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <button type="submit" class="btn btn-primary" id="createAuctionBtn">Create Auction</button>
+        <button type="button" class="btn btn-outline" onclick="window.history.back()">Cancel</button>
+      </div>
+      
+      <p id="auctionFormMsg" class="muted"></p>
+    </form>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

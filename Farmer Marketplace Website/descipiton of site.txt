@@ -1,0 +1,17 @@
+to fake in interviews.
+
+Farmer Marketplace Web Platform
+
+Full-Stack Web Project
+
+Developed a two-role marketplace enabling Farmers to register, list produce (with unit-based pricing like kg, dozen, units), and manage inventory (add/update/remove items).
+
+Built a Buyer module allowing users to register, browse products, add items to cart, and place orders.
+
+Implemented a dummy payment gateway clone (Razorpay-style) supporting card-based mock transactions for checkout simulation.
+
+Integrated a free distance API for farmers to calculate shipping distance between two cities; added backend logic to compute shipping cost using distance × rate per km.
+
+Added links to real logistics services to help farmers proceed with actual delivery booking after calculating shipping costs.
+
+Designed the front-end using HTML, CSS, JavaScript, and handled backend processes using PHP + MySQL.

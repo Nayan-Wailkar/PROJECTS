@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="cart">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a>
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line --> 
+  
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Your Cart</h2>
+
+    <p id="cartEmpty" class="muted">Your cart is empty. Browse the <a href="./marketplace.html">marketplace</a> to add items.</p>
+
+    <section id="cartItems" class="cards"></section>
+
+    <section class="card" style="margin-top:16px; display:grid; gap:10px;" id="checkoutSection">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Total Amount</strong>
+        <strong id="cartTotal">₹0.00</strong>
+      </div>
+      <button id="proceedPayment" class="btn btn-primary">Proceed to Payment</button>
+      <p id="paymentMsg" class="muted"></p>
+    </section>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Complete Your Payment</h3>
+          <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="paymentSteps">
+            <!-- Step 1: Order Summary -->
+            <div id="stepOrderSummary" class="payment-step active">
+              <h4>Order Summary</h4>
+              <div id="orderSummary"></div>
+              <div class="form-row">
+                <label for="customerEmail">Email for receipt *</label>
+                <input type="email" id="customerEmail" placeholder="your@email.com" required />
+              </div>
+              <div class="form-row">
+                <label for="shippingAddress">Shipping Address *</label>
+                <textarea id="shippingAddress" rows="3" placeholder="Enter your complete shipping address" required></textarea>
+              </div>
+              <button class="btn btn-primary" id="continueToPayment">Continue to Payment</button>
+            </div>
+
+            <!-- Step 2: Payment Method -->
+            <div id="stepPaymentMethod" class="payment-step hidden">
+              <h4>Select Payment Method</h4>
+              <div class="payment-methods">
+                <div class="payment-method active" data-method="card">
+                  <input type="radio" name="paymentMethod" value="card" checked hidden />
+                  <div class="method-icon">💳</div>
+                  <div class="method-info">
+                    <strong>Credit/Debit Card</strong>
+                    <span>Pay with Visa, Mastercard, or Rupay</span>
+                  </div>
+                </div>
+                <div class="payment-method" data-method="upi">
+                  <input type="radio" name="paymentMethod" value="upi" hidden />
+                  <div class="method-icon">📱</div>
+                  <div class="method-info">
+                    <strong>UPI</strong>
+                    <span>Pay using UPI ID</span>
+                  </div>
+                </div>
+                <div class="payment-method" data-method="netbanking">
+                  <input type="radio" name="paymentMethod" value="netbanking" hidden />
+                  <div class="method-icon">🏦</div>
+                  <div class="method-info">
+                    <strong>Net Banking</strong>
+                    <span>Pay using your bank account</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card Payment Form -->
+              <div id="cardPaymentForm" class="payment-form active">
+                <div class="test-cards-hint">
+                  <strong>Test Cards:</strong>
+                  <div>4111 1111 1111 1111 (Success)</div>
+                  <div>4000 0000 0000 0002 (Failure)</div>
+                  <div>4000 0000 0000 0003 (Pending)</div>
+                </div>
+                <div class="form-grid-2">
+                  <div class="form-row">
+                    <label for="cardNumber">Card Number *</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="cardName">Name on Card *</label>
+                    <input type="text" id="cardName" placeholder="John Doe" required />
+                  </div>
+                </div>
+                <div class="form-grid-3">
+                  <div class="form-row">
+                    <label for="expiryDate">Expiry Date *</label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="cvv">CVV *</label>
+                    <input type="text" id="cvv" placeholder="123" maxlength="3" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="saveCard" class="checkbox-label">
+                      <input type="checkbox" id="saveCard" />
+                      Save card for future
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- UPI Payment Form -->
+              <div id="upiPaymentForm" class="payment-form hidden">
+                <div class="form-row">
+                  <label for="upiId">UPI ID *</label>
+                  <input type="text" id="upiId" placeholder="yourname@upi" required />
+                </div>
+                <div class="test-cards-hint">
+                  <strong>Test UPI IDs:</strong>
+                  <div>success@upi (Success)</div>
+                  <div>failure@upi (Failure)</div>
+                  <div>pending@upi (Pending)</div>
+                </div>
+                <div class="upi-hint">
+                  <strong>Supported UPI Apps:</strong>
+                  <div class="upi-apps">
+                    <span class="upi-app">Google Pay</span>
+                    <span class="upi-app">PhonePe</span>
+                    <span class="upi-app">Paytm</span>
+                    <span class="upi-app">BHIM</span>
+                  </div>
+                </div>
+                <p class="muted">You will be redirected to your UPI app to complete the payment</p>
+              </div>
+
+              <!-- Net Banking Form -->
+              <div id="netbankingPaymentForm" class="payment-form hidden">
+                <div class="form-row">
+                  <label for="bankSelect">Select Bank *</label>
+                  <select id="bankSelect" required>
+                    <option value="">Choose your bank</option>
+                    <option value="sbi">State Bank of India</option>
+                    <option value="hdfc">HDFC Bank</option>
+                    <option value="icici">ICICI Bank</option>
+                    <option value="axis">Axis Bank</option>
+                    <option value="kotak">Kotak Mahindra Bank</option>
+                  </select>
+                </div>
+                <p class="muted">You will be redirected to your bank's portal to complete the payment</p>
+              </div>
+
+              <div class="payment-actions">
+                <button class="btn btn-outline" id="backToSummary">Back</button>
+                <button class="btn btn-primary" id="payNow">Pay Now</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Processing -->
+            <div id="stepProcessing" class="payment-step hidden">
+              <div class="processing-animation">
+                <div class="spinner"></div>
+                <h4>Processing Payment...</h4>
+                <p>Please wait while we process your payment</p>
+                <div class="processing-details">
+                  <p>Amount: <span id="processingAmount"></span></p>
+                  <p>Method: <span id="processingMethod"></span></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: UPI Redirect -->
+            <div id="stepUPIRedirect" class="payment-step hidden">
+              <!-- Content will be dynamically generated -->
+            </div>
+
+            <!-- Step 5: Success -->
+            <div id="stepSuccess" class="payment-step hidden">
+              <div class="success-animation">
+                <div class="success-icon">✅</div>
+                <h4>Payment Successful!</h4>
+                <p>Thank you for your purchase. Your order has been confirmed.</p>
+                <div class="order-details">
+                  <p><strong>Order ID:</strong> <span id="successOrderId"></span></p>
+                  <p><strong>Amount Paid:</strong> <span id="successAmount"></span></p>
+                  <p><strong>Payment Method:</strong> <span id="successMethod"></span></p>
+                  <p><strong>Transaction ID:</strong> <span id="successTransactionId"></span></p>
+                </div>
+                <div class="success-actions">
+                  <button class="btn btn-primary" id="continueShopping">Continue Shopping</button>
+                  <button class="btn btn-outline" id="viewOrder">View Order Details</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 6: Failed -->
+            <div id="stepFailed" class="payment-step hidden">
+              <div class="failed-animation">
+                <div class="failed-icon">❌</div>
+                <h4>Payment Failed</h4>
+                <p id="failureReason">Your payment could not be processed. Please try again.</p>
+                <div class="action-buttons">
+                  <button class="btn btn-primary" id="retryPayment">Try Again</button>
+                  <button class="btn btn-outline" id="cancelPayment">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> Farmer Marketplace</footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

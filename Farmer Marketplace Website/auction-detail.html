@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auction Details - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="auction-detail">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a>
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="auction-detail">
+      <img id="detailAuctionImage" class="detail-img" alt="Auction image" />
+      <div class="detail-body">
+        <div class="auction-header">
+          <h2 id="detailAuctionTitle"></h2>
+          <div id="auctionStatusBadge" class="status-badge"></div>
+        </div>
+        
+        <p id="detailAuctionMeta" class="muted"></p>
+        <p id="detailAuctionDesc"></p>
+        
+        <div class="auction-info-grid">
+          <div class="info-item">
+            <label>Base Price:</label>
+            <span id="detailBasePrice" class="price"></span>
+          </div>
+          <div class="info-item">
+            <label>Bid Increment:</label>
+            <span id="detailBidIncrement"></span>
+          </div>
+          <div class="info-item">
+            <label>Quantity:</label>
+            <span id="detailQuantity"></span>
+          </div>
+          <div class="info-item">
+            <label>Location:</label>
+            <span id="detailLocation"></span>
+          </div>
+          <div class="info-item">
+            <label>Start Time:</label>
+            <span id="detailStartTime"></span>
+          </div>
+          <div class="info-item">
+            <label>End Time:</label>
+            <span id="detailEndTime"></span>
+          </div>
+          <div class="info-item">
+            <label>Farmer Name:</label>
+            <span id="detailFarmerName"></span>
+          </div>
+          <div class="info-item">
+            <label>Farmer Email:</label>
+            <span id="detailFarmerEmail"></span>
+          </div>
+          <div class="info-item">
+            <label>Farmer Mobile:</label>
+            <span id="detailFarmerMobile"></span>
+          </div>
+        </div>
+
+        <!-- ADD DELETE BUTTON FOR AUCTION OWNER -->
+        <div id="ownerActions" class="card hidden" style="margin-top: 20px;">
+          <h4>Owner Actions</h4>
+          <button id="deleteAuctionBtn" class="btn btn-danger">Delete Auction</button>
+          <p class="muted" style="margin-top: 8px; font-size: 14px;">
+            Warning: This will permanently delete the auction and all associated bids.
+          </p>
+        </div>
+        
+        <!-- Bid Form (for buyers) -->
+        <div id="bidFormSection" class="card hidden">
+          <h4>Place Your Bid</h4>
+          <form id="bidForm" class="form">
+            <div class="form-row">
+              <label for="bidAmount">Your Bid Amount (₹)</label>
+              <input id="bidAmount" type="number" min="0" step="0.01" required />
+              <span class="form-hint" id="minBidHint"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Place Bid</button>
+          </form>
+        </div>
+
+        <!-- Bid Management (for farmers) -->
+        <div id="bidManagementSection" class="card hidden">
+          <h4>Bid Management</h4>
+          <div class="current-highest-bid" style="background: var(--primary-50); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+            <h5>🏆 Current Highest Bid</h5>
+            <div id="highestBidInfo"></div>
+          </div>
+          <div id="bidList" class="bid-list"></div>
+          <div class="form-row">
+            <button id="acceptBidBtn" class="btn btn-primary hidden">Accept Selected Bid</button>
+          </div>
+        </div>
+
+        <!-- Bid History -->
+        <div class="card">
+          <h4>Bid History</h4>
+          <div id="bidHistory"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

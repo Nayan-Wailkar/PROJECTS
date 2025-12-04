@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Details - Farmer Marketplace</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="order-details">
+  <header class="navbar">
+    <a class="brand" href="./index.html">🌾 Farmer Marketplace</a>
+    <nav class="nav-center">
+      <a href="./index.html">Home</a>
+      <a href="./marketplace.html">Products</a>
+      <a href="./auction.html">Auctions</a>
+      <a href="./transport.html">Transport Services</a>
+      <a href="./my-chats.html">My Chats</a> <!-- Add this line -->
+    </nav>
+    <nav class="nav-right">
+      <span id="userBadge" class="badge hidden"></span>
+      <a href="./cart.html" class="btn btn-outline" id="cartBtn">Cart (<span id="cartCount">0</span>)</a>
+      <button id="logoutBtn" class="btn btn-danger hidden">Logout</button>
+      <a href="./profile.html" class="icon-btn" title="Profile">
+        <img class="avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=FM" alt="Profile" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Order Details</h2>
+    
+    <div id="orderLoading" class="card text-center">
+      <p>Loading order details...</p>
+    </div>
+
+    <div id="orderNotFound" class="card text-center hidden">
+      <h3>Order Not Found</h3>
+      <p>The order you're looking for doesn't exist or you don't have permission to view it.</p>
+      <a href="./marketplace.html" class="btn btn-primary">Continue Shopping</a>
+    </div>
+
+    <section id="orderDetails" class="hidden">
+      <!-- Order Header -->
+      <div class="card">
+        <div class="order-header">
+          <h3>Order #<span id="orderId"></span></h3>
+          <div class="status-badge" id="orderStatusBadge"></div>
+        </div>
+        <div class="order-meta">
+          <p><strong>Placed on:</strong> <span id="orderDate"></span></p>
+          <p><strong>Total Amount:</strong> <span id="orderTotal" class="price"></span></p>
+          <p><strong>Payment Method:</strong> <span id="paymentMethod"></span></p>
+          <p><strong>Payment Status:</strong> <span id="paymentStatus"></span></p>
+          <p><strong>Transaction ID:</strong> <span id="transactionId"></span></p>
+        </div>
+      </div>
+
+      <!-- Shipping Information -->
+      <div class="card">
+        <h4>Shipping Information</h4>
+        <div class="shipping-info">
+          <p><strong>Email:</strong> <span id="customerEmail"></span></p>
+          <p><strong>Shipping Address:</strong></p>
+          <p id="shippingAddress" class="muted"></p>
+        </div>
+      </div>
+
+      <!-- Order Items -->
+      <div class="card">
+        <h4>Order Items</h4>
+        <div id="orderItems" class="order-items">
+          <!-- Order items will be populated here -->
+        </div>
+        <div class="order-summary-total">
+          <div class="order-total-row">
+            <span>Subtotal:</span>
+            <span id="subtotalAmount"></span>
+          </div>
+          <div class="order-total-row">
+            <span>Shipping:</span>
+            <span>Free</span>
+          </div>
+          <div class="order-total-row grand-total">
+            <span><strong>Total:</strong></span>
+            <span><strong id="grandTotal"></strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Actions -->
+      <div class="card text-center">
+        <div class="order-actions">
+          <button id="printOrder" class="btn btn-outline">Print Order</button>
+          <a href="./marketplace.html" class="btn btn-primary">Continue Shopping</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
